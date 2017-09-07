@@ -81,6 +81,15 @@ render() {
     1. The script will try to remove the styles injected at server side to prevent duplicate.
     2. However it only remove after client side styles created, so no FOUC.
 
+## Demo
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/8046480/30177575-e41a401a-9438-11e7-91f8-9ce31ce16a1c.gif" alter="normal"/>
+<img src="https://user-images.githubusercontent.com/8046480/30177572-e0abe4ec-9438-11e7-8a94-7125075a09d9.gif" alter="iso-morphic-style-loader"/>
+</p>
+
+Left is with `style-loader` and right is with `iso-morphic-style-loader`.
+
 
 [npm]: https://img.shields.io/npm/v/iso-morphic-style-loader.svg
 [npm-url]: https://npmjs.com/package/iso-morphic-style-loader
