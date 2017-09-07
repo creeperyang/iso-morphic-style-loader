@@ -56,6 +56,7 @@ module.exports = {
    *  @param {string} expected - Expected value.
    *  @param {function} done - Async callback from Mocha.
    *  @param {function} actual - Executed in the context of jsdom window, should return a string to compare to.
+   *  @param {string|function} selector - a selector or a callback invoked after compiled.
    */
   runCompilerTest: function(expected, done, actual, selector) {
     selector = selector || "head"
@@ -66,13 +67,15 @@ module.exports = {
 
       const bundleJs = stats.compilation.assets["bundle.js"].source();
 
+      if (typeof selector === 'function') return selector(bundleJs);
+
       jsdom.env({
         html: jsdomHtml,
         src: [bundleJs],
         virtualConsole: jsdom.createVirtualConsole().sendTo(console),
         done: function(err, window) {
           if (typeof actual === 'function') {
-            assert.equal(actual.apply(window), expected);  
+            assert.equal(actual.apply(window), expected);
           } else {
             assert.equal(window.document.querySelector(selector).innerHTML.trim(), expected);
           }
