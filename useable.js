@@ -24,7 +24,7 @@ module.exports.pitch = function (request) {
 		"if(content.locals) exports.locals = content.locals;",
 		"exports.use = exports.ref = function() {",
 		"	if(!(refs++)) {",
-		"		dispose = require(" + loaderUtils.stringifyRequest(this, "!" + path.join(__dirname, "lib", "addStyles.js")) + ")(content, " + JSON.stringify(options) + ");",
+		"		dispose = require(" + loaderUtils.stringifyRequest(this, "!" + path.join(__dirname, "lib", "addUniversalStyles.js")) + ")(content, " + JSON.stringify(options) + ");",
 		"	}",
 		"	return exports;",
 		"};",

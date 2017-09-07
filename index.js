@@ -29,7 +29,7 @@ module.exports.pitch = function (request) {
 		"var options = " + JSON.stringify(options),
 		"options.transform = transform",
 		"// add the styles to the DOM",
-		"var update = require(" + loaderUtils.stringifyRequest(this, "!" + path.join(__dirname, "lib", "addStyles.js")) + ")(content, options);",
+		"var update = require(" + loaderUtils.stringifyRequest(this, "!" + path.join(__dirname, "lib", "addUniversalStyles.js")) + ")(content, options);",
 		"if(content.locals) module.exports = content.locals;",
 		"// Hot Module Replacement",
 		"if(module.hot) {",
