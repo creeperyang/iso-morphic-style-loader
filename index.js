@@ -32,7 +32,7 @@ module.exports.pitch = function (request) {
 		"var update = require(" + loaderUtils.stringifyRequest(this, "!" + path.join(__dirname, "lib", "addUniversalStyles.js")) + ")(content, options);",
 		"if(content.locals) module.exports = content.locals;",
 		"// Hot Module Replacement",
-		"if(module.hot) {",
+		"if(module.hot && typeof window === 'object' && window.document) {",
 		"	// When the styles change, update the <style> tags",
 		"	if(!content.locals) {",
 		"		module.hot.accept(" + loaderUtils.stringifyRequest(this, "!!" + request) + ", function() {",
