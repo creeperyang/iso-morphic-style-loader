@@ -1,8 +1,8 @@
 {
-  "name": "style-loader",
-  "version": "0.18.2",
-  "author": "Tobias Koppers @sokra",
-  "description": "style loader module for webpack",
+  "name": "iso-morphic-style-loader",
+  "version": "1.0.0",
+  "author": "creeperyang",
+  "description": "isomorphic style loader module for webpack",
   "engines": {
     "node": ">= 0.12.0"
   },
@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:webpack/style-loader.git"
+    "url": "git@github.com:creeperyang/iso-morphic-style-loader.git"
   },
   "license": "MIT"
 }
