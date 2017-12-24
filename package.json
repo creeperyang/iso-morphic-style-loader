@@ -1,6 +1,6 @@
 {
   "name": "iso-morphic-style-loader",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "creeperyang",
   "description": "isomorphic style loader module for webpack",
   "engines": {

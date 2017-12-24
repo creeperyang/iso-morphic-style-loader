@@ -30,23 +30,26 @@ However, some more work if you want to add [critical path CSS](https://developer
 data.styles = []
 // iso-morphic-style-loader will export global.__universal__ and you
 // can access it to get styles.
-if (global.__universal__) {
-  global.__universal__.forEach(v => {
-    data.styles.push({
-      ...v.attrs,
-      id: v.id,
-      cssText: v.content.join('\n')
+const context = {
+  // will be invoked when render in server side
+  iterateCss: (styles) => {
+    styles.forEach(style => {
+      data.push({
+        ...style.attrs,
+        id: style.id,
+        cssText: style.content.join('\n')
+      })
     })
-  })
+  },
 }
 // Then we will pass this styles to your React Component.
-const html = ReactDOM.renderToStaticMarkup(<Component {...data} />)
+const html = ReactDOM.renderToStaticMarkup(<App {...data} />)
 res.status(route.status || 200)
 res.send(`<!doctype html>${html}`)
 
 ///////////
 
-// Here maybe your component.js
+// Here is your App.js
 // Perfect, we can insert styles easily.
 render() {
   return (
@@ -59,6 +62,20 @@ render() {
       />
     )}
   )
+}
+
+//////////
+// And here your component where really import styles
+import React from 'react'
+import PropTypes from 'prop-types'
+import notifyCssDeps from 'iso-morphic-style-loader/lib/notifyCssDeps'
+import css from './index.css'
+import css2 from './demo.css'
+
+// The decorator will invoke previous iterateCss method when the component get rendered
+@notifyCssDeps(css, css2)
+class MyComponent extends React.Component {
+  render() {}
 }
 ```
 
