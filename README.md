@@ -28,8 +28,8 @@ However, some more work if you want to add [critical path CSS](https://developer
 /// Such as server.js, where you render your isomorphic app and will send it
 /// back to your user.
 data.styles = []
-// iso-morphic-style-loader will export global.__universal__ and you
-// can access it to get styles.
+// iso-morphic-style-loader will offer you the way to access imported styles
+// via React's context.
 const context = {
   // will be invoked when render in server side
   iterateCss: (styles) => {
@@ -81,13 +81,21 @@ class MyComponent extends React.Component {
 
 ## Features
 
-1. For server side, the lib will export `__universal__` to `global`, and you can access it to get styles.
+1. For server side, the lib will use React's context to offer you a way to access styles.
 
-    `__universal__.forEach(v => console.log(v.id, v.attrs, v.content))`
-
-    `__universal__.map(v => console.log(v.id, v.attrs, v.content))`
+    ```js
+    iterateCss: (styles) => {
+      styles.forEach(style => {
+        data.push({
+          ...style.attrs,
+          id: style.id,
+          cssText: style.content.join('\n')
+        })
+      })
+    }
+    ```
   
-    Nothing will happens if you ignore `__universal__`, no errors in server side rendering, and works the same as `style-loader` do.
+    Nothing will happens if you ignore `iterateCss`, no errors in server side rendering, and works the same as `style-loader` do.
 
     But if you want to optimize for critical path CSS rendering, please inject styles during server side rendering.
 
