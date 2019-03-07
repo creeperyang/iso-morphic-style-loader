@@ -410,7 +410,8 @@ describe("basic tests", function() {
       {
         loader: "css-loader",
         options: {
-          localIdentName: '[name].[local]_[hash:base64:7]'
+          localIdentName: '[name].[local]_[hash:base64:7]',
+          modules: true
         }
       }
     ];
@@ -434,7 +435,8 @@ describe("basic tests", function() {
       {
         loader: "css-loader",
         options: {
-          localIdentName: '[name].[local]_[hash:base64:7]'
+          localIdentName: '[name].[local]_[hash:base64:7]',
+          modules: true
         }
       }
     ];
@@ -461,11 +463,11 @@ describe("basic tests", function() {
       {
         loader: "css-loader",
         options: {
-          ident: 'css',
           localIdentName: '[name].[local]_[hash:base64:7]',
           getLocalIdent: (context, localIdentName, localName) => {
             return 'X' + localName;
-          }
+          },
+          modules: true
         }
       }
     ];
@@ -492,7 +494,8 @@ describe("basic tests", function() {
       {
         loader: "css-loader",
         options: {
-          localIdentName: '[name].[local]_[hash:base64:7]'
+          localIdentName: '[name].[local]_[hash:base64:7]',
+          modules: true
         }
       }
     ];
@@ -561,25 +564,6 @@ describe("basic tests", function() {
 
       runCompilerTest(expected, done);
     });
-  });
-
-  describe("HMR", function() {
-    it("should output HMR code block by default", function(done) {
-      runSourceTest(/module\.hot/g, null, done);
-    });
-
-    it("should output HMR code block when options.hmr is true", function(done) {
-      styleLoaderOptions.hmr = true;
-      setupWebpackConfig();
-      runSourceTest(/module\.hot/g, null, done);
-    });
-
-    it("should not output HMR code block when options.hmr is false", function(done) {
-      styleLoaderOptions.hmr = false;
-      setupWebpackConfig();
-      runSourceTest(null, /module\.hot/g, done);
-    });
-
   });
 
 });
